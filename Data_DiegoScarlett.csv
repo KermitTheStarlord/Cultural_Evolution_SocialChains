@@ -1,0 +1,67 @@
+Group,Subgroup,Item,Diego,Scarlett,Gender,KnowDiego,KnowScarlett,Interviewer
+1,1,0,Diego Maradona,Scarlett Johanson,Onset,Onset,Onset,Katharina
+1,1,1,Diego Maradona,Scarlett Johanson,Female,1,1,Katharina
+1,1,2,Diego Maradona,Scarlett Johnson,Male,1,1,Katharina
+1,1,3,Diego Maradonna,Scarlet Johannson,Female,1,1,Katharina
+1,1,4,Diego Maradona,Scarlett Johansson,Male,1,1,Katharina
+1,1,5,Diego Maradona,Scarlett Johannson,Male,1,0,Katharina
+1,1,6,Diego Maradona,,Male,1,0,Katharina
+1,1,7,Diego Maradona,Scarlett Johanson,Male,1,1,Katharina
+1,1,8,Diego Marradonna,Scarlett Johanson,Female,0,1,Katharina
+1,1,9,Griezman,Scarlett Johanson,Male,0,1,Katharina
+1,1,10,Maradona,Scarlett Joanson,Female,1,1,Katharina
+1,2,0,Diego Maradona,Scarlett Johanson,Onset,Onset,Onset,Akash
+1,2,1,Diego Maradona,Scarlet Johanson,Female,1,1,Akash
+1,2,2,Diago Maragona,Scarlet Johnson,Female,0,0,Akash
+1,2,3,Diego Maradonna,Scarlet Johansson,Male,1,1,Akash
+1,2,4,Diego Maradona,Scarlett Johansson,Male,1,1,Akash
+1,2,5,Diago Maradona,,Female,1,0,Akash
+1,2,6,Digo Maradona,Jonson,Male.,1,0,Akash
+1,2,7,Diego Maradona,Scarlet Johanson,Male,1,1,Akash
+1,2,8,Diego Maradona,Scarlet Johansson,Female,1,1,Akash
+1,2,9,Diego Maradonna,Scarlet Johanson,Female,1,1,Akash
+1,2,10,Diego Maradona,Scarlett Johansson,Female,1,1,Akash
+1,3,0,Diego Maradona,Scarlett Johanson,Onset,Onset,Onset,Arthur
+1,3,1,Diego Maradona,Scarlett Joanson,Male,1,1,Arthur
+1,3,2,Diego Maradona,Scarlet Johanson,Female,1,1,Arthur
+1,3,3,Diego Maradona,Scarlet Johannson,Male,1,1,Arthur
+1,3,4,Diego Maradona,Scarlett Joanson,Female,0,1,Arthur
+1,3,5,Diego Maradona,Scarlett Johanson,Female,1,1,Arthur
+1,3,6,Diego Maradona,Scarlett Johannson,Female,1,1,Arthur
+1,3,7,Diego Maradona,Scarlett Johansson,Male,1,1,Arthur
+1,3,8,Diego Maradona,Scarlett,Female,1,0,Arthur
+1,3,9,Diego Marlanzola,Scarlett Johansson,Male,0,1,Arthur
+1,3,10,Diego Maradona,Scarlett Johanson,Female,0,1,Arthur
+2,1,0,Diego Maradonna,Scarlett Johansson,Onset,Onset,Onset,Katharina
+2,1,1,Diego Marradona,Joshan Scarlett,Male,1,0,Katharina
+2,1,2,Diego Maradona,Scarlett Johanson,Male,1,1,Katharina
+2,1,3,Diego Maradona,Scarlett Johansson,Male,1,1,Katharina
+2,1,4,diego maradona,Scarlet Joanhson,Male,1,1,Katharina
+2,1,5,Diego Maradona,Scarlett Johanson,Female,1,1,Katharina
+2,1,6,Diego Maradona,,Female,1,0,Katharina
+2,1,7,Diego Maradona,Scarlett Johnson,Female,1,1,Katharina
+2,1,8,Diego Maradona,Scarlet Johansson,Male,1,1,Katharina
+2,1,9,Diego Maradona,Scarlett Johanson,Male,1,1,Katharina
+2,1,10,,,,,,Katharina
+2,2,0,Diego Maradonna,Scarlett Johansson,Onset,Onset,Onset,Akash
+2,2,1,Deogo Maradona,Scarlate Johansone,Female,1,0,Akash
+2,2,2,Diego Maradona,Scarlet Johansson,Female,1,1,Akash
+2,2,3,Diygo Maradona,Jhonahan,Female,1,0,Akash
+2,2,4,Diego Maradona,Scarlet Johanson,Male,1,1,Akash
+2,2,5,Diego Maradonna,Scarlet Johanson,Male,1,1,Akash
+2,2,6,Diego Maradona,Scarlet Johansson,Female,1,1,Akash
+2,2,7,Diego Maradona,Scarlet Johanson,Male,1,1,Akash
+2,2,8,Diego Mardona,Scarlet Johanson,Female,1,1,Akash
+2,2,9,Diego Maradona,Scarlet Jonahsan,Male,1,0,Akash
+2,2,10,Diego Maradona,Scarlet Johnson,Female,1,0,Akash
+2,3,0,Diego Maradonna,Scarlett Johansson,Onset,Onset,Onset,Arthur
+2,3,1,Diego Maradona,Scarlett Johanson,Male,1,1,Arthur
+2,3,2,Diego Maradona,Scarlett Johanson,Male,1,1,Arthur
+2,3,3,Diego Maradona,Scarlet Johnson,Female,1,1,Arthur
+2,3,4,Diego Maradona,Scarlett Johansson,Female,1,1,Arthur
+2,3,5,Diego Maradonna,Scarlett Johanson,Male,1,1,Arthur
+2,3,6,Diego Maradonna,Scarlett Johansson,Female,0,1,Arthur
+2,3,7,Diego Maradona,Scarlet Johanson,Female,1,1,Arthur
+2,3,8,Diego Maradona,Scarlett Johanson,Male,1,1,Arthur
+2,3,9,Diego Maradona,Scarlett Johannson,Male,1,1,Arthur
+2,3,10,Diego Maradona,Scarlett Johasson,Male,1,1,Arthur
