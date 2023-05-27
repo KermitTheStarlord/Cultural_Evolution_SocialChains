@@ -108,7 +108,8 @@ listChanges <- function(dataFrame,columnToCheck,columnsToKeep=NA){
 # We create a function to get the stateMatrix of the different possible
 # spelling
 
-getStateMatrix <- function(dataFrame,columnToCheck,groupUnique=FALSE){
+getStateMatrix <- function(
+    dataFrame,columnToCheck,groupUnique=FALSE,uniqueThreshold=1){
   # This function outputs a matrix
   # dataFrame is a dataFrame object, that does not contain the string "Other"
   # in the columnToCheck column.
@@ -122,7 +123,7 @@ getStateMatrix <- function(dataFrame,columnToCheck,groupUnique=FALSE){
   # as "Other"
   if (groupUnique==TRUE){
     occurenceTable <- getOccurencesTable(dataFrame,columnToCheck)
-    listOfIsolatedDf <- subset(occurenceTable,Freq==1)
+    listOfIsolatedDf <- subset(occurenceTable,Freq<=uniqueThreshold)
     listOfIsolated <- listOfIsolatedDf[,1]
   } else {
     listOfIsolated = c("")
@@ -162,11 +163,14 @@ getStateMatrix <- function(dataFrame,columnToCheck,groupUnique=FALSE){
 # We use the igraph library to plot simple state-change between possible
 # spellings.
 
-stateMatrix <- getStateMatrix(cleanData,"Diego",groupUnique=TRUE)
+diegoStateMatrix <- getStateMatrix(cleanData,"Diego",groupUnique=TRUE,uniqueThreshold=1)
+scarlettStateMatrix <- getStateMatrix(cleanData,"Scarlett",groupUnique=TRUE,uniqueThreshold=3)
 
-plotNetwork <- function(stateMatrix){
+plotNetwork <- function(stateMatrix,probaNetwork=TRUE){
   # This function inputs a stateMatrix and displays a graph using a network
   # object from the igraph library.
+  # It can either be a network of probability (by node), or of frequency
+  # (by network)
   numberNodes <- dim(stateMatrix)[1]
   networkMatrix <- matrix(
     rep.int(1,numberNodes*numberNodes),
@@ -174,26 +178,31 @@ plotNetwork <- function(stateMatrix){
     ncol=numberNodes)
   network <- graph_from_adjacency_matrix(networkMatrix)
   
-  totalWeight <- sum(stateMatrix)
-  widthVector <- c()
-  for (i in stateMatrix){
-    widthVector = append(widthVector,(i/totalWeight))
+  if (probaNetwork == TRUE){
+    # This is for probability
+    widthVector = scale(stateMatrix, center=FALSE, scale=colSums(stateMatrix))
+  } else {
+    # This is for overall proportion
+    totalWeight <- sum(stateMatrix)
+    widthVector <- c()
+    for (i in stateMatrix){
+      widthVector = append(widthVector,(i/totalWeight))
   }
-  
+  }
   plot(network,
        vertex.color = "white",
        vertex.shape = "rectangle",
-       vertex.size = 150,
-       vertex.size2 = 30,
+       vertex.size = 80,
+       vertex.size2 = 10,
        
        vertex.label = colnames(stateMatrix),
        vertex.label.color = "black",
        vertex.label.font = 2, #Bold
        
-       edge.color = "pink",
-       edge.width = 30*widthVector,
-       edge.arrow.size = 1,
-       edge.arrow.width = 2,
+       edge.color = "grey",
+       edge.width = 5*widthVector + 0.000000001,
+       edge.arrow.size = 0.2,
+       edge.arrow.width = 1,
        edge.curved = 0.5,
        edge.label = round(widthVector, digits = 3),
        
@@ -202,7 +211,9 @@ plotNetwork <- function(stateMatrix){
        )
 }
 
-plotNetwork(stateMatrix)
+plotNetwork(diegoStateMatrix,probaNetwork=TRUE)
+plotNetwork(scarlettStateMatrix,probaNetwork=TRUE)
+
 ################################################################################
 # 4. Graphing Results ##########################################################
 ################################################################################
