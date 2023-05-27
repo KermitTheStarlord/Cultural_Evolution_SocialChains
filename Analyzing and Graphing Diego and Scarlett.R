@@ -109,7 +109,7 @@ listChanges <- function(dataFrame,columnToCheck,columnsToKeep=NA){
 # spelling
 
 getStateMatrix <- function(
-    dataFrame,columnToCheck,groupUnique=FALSE,uniqueThreshold=1){
+    dataFrame,columnToCheck,groupUnique=FALSE,uniqueThreshold=1,lineToSkip="Item"){
   # This function outputs a matrix
   # dataFrame is a dataFrame object, that does not contain the string "Other"
   # in the columnToCheck column.
@@ -146,6 +146,7 @@ getStateMatrix <- function(
   colnames(stateMatrix) = rownames(stateMatrix) = matrixName
   
   for (index in 2:length(dataFrame[,columnToCheck])){
+    # Here is the unique name used
     if (dataFrame[index,"Item"] == 0){next}
     else {
       previousAnswer = dataFrame[index-1,columnToCheck]
@@ -160,11 +161,65 @@ getStateMatrix <- function(
   return(stateMatrix)
 }
 
-# We use the igraph library to plot simple state-change between possible
-# spellings.
-
 diegoStateMatrix <- getStateMatrix(cleanData,"Diego",groupUnique=TRUE,uniqueThreshold=1)
 scarlettStateMatrix <- getStateMatrix(cleanData,"Scarlett",groupUnique=TRUE,uniqueThreshold=3)
+
+# We focus on the evolution of the double consonnants
+
+flagString <- function(dataFrame,string,columnToCheck,columnsToKeep=NA){
+  # This functions outputs a dataframe composed of columnToCheck, columnsToKeep,
+  # and a new column called "Is there string" that flags the presence of the
+  # inputed string.
+  # It copies the List Change structure.
+  
+  if (sum(is.na(columnsToKeep))){
+    outputDf <- as.data.frame(dataFrame[,c(columnToCheck)])
+    colnames(outputDf) <- columnToCheck
+  } else {
+    outputDf <- dataFrame[,c(columnToCheck,columnsToKeep)]
+  }
+  isThereString = paste("Is there",string)
+  outputDf[isThereString] <- rep(NA,length(dataFrame[,1]))
+  
+  forLoopIndex = 0
+  for (stringToCheck in outputDf[,columnToCheck]){
+    forLoopIndex <- forLoopIndex + 1
+    if (grepl(string,stringToCheck,)){
+      outputDf[forLoopIndex,isThereString] <- paste(string,"is present")
+    } else {
+      outputDf[forLoopIndex,isThereString] <- paste(string,"is abscent")
+    }
+  }
+  
+  return(outputDf)
+}
+
+# Diego double N
+flagDiegoDoubleN <- flagString(cleanData,"nn","Diego",columnsToKeep="Item")
+diegoDoubleNStateMatrix <- getStateMatrix(
+                          flagDiegoDoubleN,"Is there nn", groupUnique=FALSE)
+
+# Scarlett Double S
+flagScarlettDoubleS <- flagString(cleanData,"ss","Scarlett",columnsToKeep="Item")
+scarlettDoubleSStateMatrix <- getStateMatrix(
+                          flagScarlettDoubleS,"Is there ss", groupUnique=FALSE)
+
+# Scarlett Double N
+flagScarlettDoubleN <- flagString(cleanData,"nn","Scarlett",columnsToKeep="Item")
+scarlettDoubleNStateMatrix <- getStateMatrix(
+  flagScarlettDoubleN,"Is there nn", groupUnique=FALSE)
+
+# Scarlett Double T
+flagScarlettDoubleT <- flagString(cleanData,"tt","Scarlett",columnsToKeep="Item")
+scarlettDoubleTStateMatrix <- getStateMatrix(
+  flagScarlettDoubleT,"Is there tt", groupUnique=FALSE)
+
+################################################################################
+# 4. Graphing Results ##########################################################
+################################################################################
+
+# We use the igraph library to plot simple state-change between possible
+# spellings.
 
 plotNetwork <- function(stateMatrix,probaNetwork=TRUE){
   # This function inputs a stateMatrix and displays a graph using a network
@@ -201,7 +256,7 @@ plotNetwork <- function(stateMatrix,probaNetwork=TRUE){
        
        edge.color = "grey",
        edge.width = 5*widthVector + 0.000000001,
-       edge.arrow.size = 0.2,
+       edge.arrow.size = 1,
        edge.arrow.width = 1,
        edge.curved = 0.5,
        edge.label = round(widthVector, digits = 3),
@@ -211,10 +266,12 @@ plotNetwork <- function(stateMatrix,probaNetwork=TRUE){
        )
 }
 
+# Ploting the proba networks of different spellings
 plotNetwork(diegoStateMatrix,probaNetwork=TRUE)
 plotNetwork(scarlettStateMatrix,probaNetwork=TRUE)
 
-################################################################################
-# 4. Graphing Results ##########################################################
-################################################################################
-
+# plotting the proba networks of the double n and double s
+plotNetwork(diegoDoubleNStateMatrix,probaNetwork=TRUE)
+plotNetwork(scarlettDoubleSStateMatrix,probaNetwork=TRUE)
+plotNetwork(scarlettDoubleNStateMatrix,probaNetwork=TRUE)
+plotNetwork(scarlettDoubleTStateMatrix,probaNetwork=TRUE)
